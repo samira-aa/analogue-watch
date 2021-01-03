@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>clock</title>
+    <style>
+        *,
+        *::after,
+        *::before {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #333;
+        }
+        
+        .clock {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 10px solid white;
+            position: relative;
+            margin: 200px auto;
+        }
+        
+        .second-line,
+        .minute-line,
+        .hour-line {
+            width: 80px;
+            height: 1px;
+            background-color: white;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            /* border-radius: 50%; */
+            /* transform: translate(0, -50%); */
+            /* transform: translate(0, -50%) rotate(20deg); */
+            transform-origin: 0 50%;
+            /* transition: 0.3s; */
+        }
+        
+        .minute-line {
+            width: 60px;
+            height: 2px;
+            background-color: dodgerblue;
+        }
+        
+        .hour-line {
+            width: 40px;
+            height: 3px;
+            background-color: olivedrab;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="clock">
+        <div class="hour-line"></div>
+        <div class="minute-line"></div>
+        <div class="second-line"></div>
+    </div>
+
+    <script>
+        const secondLine = document.querySelector(".second-line");
+        const minuteLine = document.querySelector(".minute-line");
+        const hourLine = document.querySelector(".hour-line");
+
+        //making seconds
+        function setSecond() {
+            let secondNum = new Date().getSeconds();
+
+            let secondDeg = -(90 - secondNum * 6);
+            secondLine.style.transform = `translate(0, -50%) rotate(${secondDeg}deg)`;
+        }
+        setSecond();
+
+        //making minutes
+        function setMinute() {
+            let minuteNum = new Date().getMinutes();
+            let minuteDeg = -(90 - minuteNum * 6);
+            minuteLine.style.transform = `translate(0, -50%) rotate(${minuteDeg}deg)`;
+        }
+        setMinute();
+
+        //making hours
+        function setHour() {
+            let hourNum = new Date().getHours();
+            let minuteDeg = -(90 - hourNum * 30);
+            hourLine.style.transform = `translate(0, -50%) rotate(${minuteDeg}deg)`;
+        }
+        setHour();
+
+        setInterval(setSecond, 1000);
+        setInterval(setMinute, 1000);
+        setInterval(setHour, 1000);
+    </script>
+</body>
+
+</html>
